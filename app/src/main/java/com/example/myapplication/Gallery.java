@@ -58,7 +58,6 @@ public class Gallery extends Fragment {
             try {
                 img.accumulate("id", raw_img.getId());
                 img.accumulate("name", raw_img.getDisplayname());
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -94,21 +93,22 @@ public class Gallery extends Fragment {
         View view = inflater.inflate(R.layout.activity_gallery, container, false);
 
         gallery_view = view.findViewById(R.id.gallery_gridview);
-        gallery_view.setAdapter(new Image_GridView_Adapter(view, gallery_list));
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        final JSONArray gallery_list_response = mainActivity.getData_gallery();
+        gallery_view.setAdapter(new Image_GridView_Adapter(view, gallery_list_response));
 
         gallery_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), Picture_detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("imglist", (ArrayList<? extends Parcelable>) gallery_list);
+                bundle.putString("imglist", gallery_list_response.toString());
                 bundle.putSerializable("position", position);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-
-
         return view;
     }
 
@@ -118,9 +118,7 @@ public class Gallery extends Fragment {
         gallery_list = new ArrayList<>();
         String[] projection = {
                 MediaStore.Images.Media._ID,
-                MediaStore.Images.Media.DISPLAY_NAME,
-                MediaStore.Images.Media.DATE_ADDED,
-                MediaStore.Images.Media.SIZE
+                MediaStore.Images.Media.DISPLAY_NAME
         };
 
         Cursor cursor = getActivity().getContentResolver().query(
@@ -131,8 +129,6 @@ public class Gallery extends Fragment {
             ImageDTO image_dto = new ImageDTO();
             image_dto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)));
             image_dto.setDisplayname(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)));
-            image_dto.setDate(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED)));
-            image_dto.setSize(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.SIZE)));
             gallery_list.add(image_dto);
         }
         cursor.close();
@@ -141,8 +137,6 @@ public class Gallery extends Fragment {
     public static class ImageDTO implements Parcelable {
         private String id;
         private String displayname;
-        private String date;
-        private String size;
 
 
         public ImageDTO() {
@@ -151,8 +145,7 @@ public class Gallery extends Fragment {
         public ImageDTO(Parcel in) {
             id = in.readString();
             displayname = in.readString();
-            date = in.readString();
-            size = in.readString();
+
 
         }
 
@@ -172,30 +165,14 @@ public class Gallery extends Fragment {
             this.displayname = displayname;
         }
 
-        public String getDate() {
-            return date;
-        }
+
 
         @Override
         public String toString() {
             return "ImageDto{" +
                     "id='" + id + '\'' +
                     ", displayname='" + displayname + '\'' +
-                    ", date='" + date + '\'' +
-                    ", size='" + size + '\'' +
                     '}';
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-
-        public String getSize() {
-            return size;
-        }
-
-        public void setSize(String size) {
-            this.size = size;
         }
 
         public static final Creator<ImageDTO> CREATOR = new Creator<ImageDTO>() {
@@ -219,8 +196,6 @@ public class Gallery extends Fragment {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(id);
             dest.writeString(displayname);
-            dest.writeString(date);
-            dest.writeString(size);
         }
     }
 }

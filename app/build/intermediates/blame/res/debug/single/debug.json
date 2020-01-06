@@ -2092,6 +2092,10 @@
         "source": "C:\\Users\\q\\.gradle\\caches\\transforms-2\\files-2.1\\6119d746697059b7e1b74aab4d181f56\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+        "merged": "C:\\Users\\q\\AndroidStudioProjects\\MyApplication2\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_contact_detail_view.xml.flat",
+        "source": "C:\\Users\\q\\AndroidStudioProjects\\MyApplication2\\app\\src\\main\\res\\layout\\activity_contact_detail_view.xml"
+    },
+    {
         "merged": "C:\\Users\\q\\AndroidStudioProjects\\MyApplication2\\app\\build\\intermediates\\res\\merged\\debug\\layout_mtrl_layout_snackbar_include.xml.flat",
         "source": "C:\\Users\\q\\.gradle\\caches\\transforms-2\\files-2.1\\c7eb9cd3508ac3959447c14fd76c9fb9\\material-1.0.0\\res\\layout\\mtrl_layout_snackbar_include.xml"
     },

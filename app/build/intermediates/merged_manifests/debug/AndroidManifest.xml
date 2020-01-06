@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.myapplication.ContactDetailView" />
         <activity android:name="com.example.myapplication.Picture_detail" />
         <activity android:name="com.example.myapplication.Image_GridView_Adapter" />
         <activity android:name="com.example.myapplication.RecyclerViewAdapter" />

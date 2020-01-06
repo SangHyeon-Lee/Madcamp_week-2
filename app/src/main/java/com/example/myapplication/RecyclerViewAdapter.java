@@ -34,7 +34,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(itemView.getContext(), ContactDetailView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("data", myDataList.optJSONObject(getAdapterPosition()).toString());
+                    intent.putExtras(bundle);
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }

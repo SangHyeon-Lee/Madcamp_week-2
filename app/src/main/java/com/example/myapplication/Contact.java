@@ -71,7 +71,9 @@ public class Contact extends Fragment {
                 false
         );
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new RecyclerViewAdapter(contact_list));  // Adapter 등록
+        MainActivity mainActivity = (MainActivity) getActivity();
+        JSONArray contact_list_response = mainActivity.getData();
+        recyclerView.setAdapter(new RecyclerViewAdapter(contact_list_response));  // Adapter 등록
         return view;
     }
 
