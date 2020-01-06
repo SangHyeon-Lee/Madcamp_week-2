@@ -1142,6 +1142,8 @@ id clip_horizontal
 id clip_vertical
 id collapseActionView
 id contact_card_view
+id contact_detail_name
+id contact_detail_phone_number
 id contact_name
 id contact_phone_number
 id container
@@ -1186,9 +1188,7 @@ id icon
 id icon_group
 id ifRoom
 id image
-id img_date
 id img_name
-id img_size
 id info
 id invisible
 id italic
@@ -1375,6 +1375,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_contact
+layout activity_contact_detail_view
 layout activity_gallery
 layout activity_image_grid_view_adapter
 layout activity_main

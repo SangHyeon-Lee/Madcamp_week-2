@@ -14,25 +14,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import org.json.JSONArray;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Image_GridView_Adapter extends BaseAdapter {
 
-    List<Gallery.ImageDTO> gallery_list;
+    JSONArray gallery_list_response;
     View view;
     LayoutInflater inflater;
 
-    public Image_GridView_Adapter(View view, ArrayList<Gallery.ImageDTO> gallery_list) {
-        this.gallery_list = gallery_list;
+    public Image_GridView_Adapter(View view, JSONArray gallery_list_response) {
+        this.gallery_list_response = gallery_list_response;
         this.view = view;
         this.inflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return gallery_list.size();
+        return gallery_list_response.length();
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Image_GridView_Adapter extends BaseAdapter {
         }
 
         ImageView imageView = convertView.findViewById(R.id.image);
-        Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, (gallery_list.get(position)).getId());
+        Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, (gallery_list_response.optJSONObject(position)).optString("id"));
         Bitmap resize_img = resize(convertView.getContext(), uri, 100);
         imageView.setImageBitmap(resize_img);
 

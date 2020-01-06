@@ -42,13 +42,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements Contact.OnDataPass, Gallery.OnDataPass_gallery {
 
     MypagerAdapter adapter = new MypagerAdapter(getSupportFragmentManager());
     private String contact_list_string;
     private String gallery_list_string;
-
+    JSONArray response_array;
+    JSONArray response_array_contact;
+    JSONArray response_array_gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +77,6 @@ public class MainActivity extends AppCompatActivity implements Contact.OnDataPas
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(pager);
-
-
-
     }
 
     @Override
@@ -89,16 +89,43 @@ public class MainActivity extends AppCompatActivity implements Contact.OnDataPas
     public void OnDataPass_gallery(String data) {
         gallery_list_string = new String();
         gallery_list_string = data;
-        new JSONTask().execute("http://192.249.19.252:3480/");
+        try {
+            String response = new JSONTask().execute("http://192.249.19.252:3480/").get();
+            response_array = new JSONArray(response);
+            response_array_gallery = new JSONArray();
+            response_array_contact = new JSONArray();
+            for (int i=0; i<response_array.length(); i++){
+                JSONObject raw_obj = response_array.getJSONObject(i);
+                if(raw_obj.has("id")){
+                    response_array_gallery.put(raw_obj);
+                }else{
+                    response_array_contact.put(raw_obj);
+                }
+            }
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public JSONArray getData() {
+        return response_array_contact;
     }
 
+    public JSONArray getData_gallery(){
 
+        return response_array_gallery;
+    }
     private class JSONTask extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... urls) {
             try {
-
                 HttpURLConnection con = null;
                 BufferedReader reader = null;
 
