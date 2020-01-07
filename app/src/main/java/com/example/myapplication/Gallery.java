@@ -1,44 +1,20 @@
 package com.example.myapplication;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+
 import android.widget.GridView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 
 public class Gallery extends Fragment {
 
-    private ArrayList<ImageDTO> gallery_list;
-    private JSONArray json_gallery_list;
     private GridView gallery_view;
 
     public static Gallery newInstance() {
@@ -49,40 +25,7 @@ public class Gallery extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getGalleryList();
-        json_gallery_list = new JSONArray();
-
-        for (int i = 0; i < gallery_list.size(); i++) {
-            JSONObject img = new JSONObject();
-            ImageDTO raw_img = gallery_list.get(i);
-            try {
-                img.accumulate("id", raw_img.getId());
-                img.accumulate("name", raw_img.getDisplayname());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            json_gallery_list.put(img);
-        }
-        passData(json_gallery_list.toString());
-
-
     }
-    public interface OnDataPass_gallery {
-        public void OnDataPass_gallery(String data);
-    }
-
-    OnDataPass_gallery dataPasser;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dataPasser = (OnDataPass_gallery) context;
-    }
-
-    public void passData(String data) {
-        dataPasser.OnDataPass_gallery(data);
-    }
-
 
     @Nullable
     @Override
@@ -94,8 +37,8 @@ public class Gallery extends Fragment {
 
         gallery_view = view.findViewById(R.id.gallery_gridview);
 
-        MainActivity mainActivity = (MainActivity) getActivity();
-        final JSONArray gallery_list_response = mainActivity.getData_gallery();
+        MainActivity2 mainActivity2 = (MainActivity2) getActivity();
+        final JSONArray gallery_list_response = mainActivity2.getData_gallery();
         gallery_view.setAdapter(new Image_GridView_Adapter(view, gallery_list_response));
 
         gallery_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,92 +53,5 @@ public class Gallery extends Fragment {
             }
         });
         return view;
-    }
-
-
-
-    private void getGalleryList() {
-        gallery_list = new ArrayList<>();
-        String[] projection = {
-                MediaStore.Images.Media._ID,
-                MediaStore.Images.Media.DISPLAY_NAME
-        };
-
-        Cursor cursor = getActivity().getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                projection, null, null, null);
-
-        while (cursor.moveToNext()) {
-            ImageDTO image_dto = new ImageDTO();
-            image_dto.setId(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)));
-            image_dto.setDisplayname(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)));
-            gallery_list.add(image_dto);
-        }
-        cursor.close();
-    }
-
-    public static class ImageDTO implements Parcelable {
-        private String id;
-        private String displayname;
-
-
-        public ImageDTO() {
-        }
-
-        public ImageDTO(Parcel in) {
-            id = in.readString();
-            displayname = in.readString();
-
-
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getDisplayname() {
-            return displayname;
-        }
-
-        public void setDisplayname(String displayname) {
-            this.displayname = displayname;
-        }
-
-
-
-        @Override
-        public String toString() {
-            return "ImageDto{" +
-                    "id='" + id + '\'' +
-                    ", displayname='" + displayname + '\'' +
-                    '}';
-        }
-
-        public static final Creator<ImageDTO> CREATOR = new Creator<ImageDTO>() {
-            @Override
-            public ImageDTO createFromParcel(Parcel source) {
-                return new ImageDTO(source);
-            }
-
-            @Override
-            public ImageDTO[] newArray(int size) {
-                return new ImageDTO[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(id);
-            dest.writeString(displayname);
-        }
     }
 }
