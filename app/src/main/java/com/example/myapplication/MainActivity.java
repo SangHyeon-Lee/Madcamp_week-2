@@ -1,228 +1,183 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.provider.ContactsContract;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements Contact.OnDataPass, Gallery.OnDataPass_gallery {
 
-    MypagerAdapter adapter = new MypagerAdapter(getSupportFragmentManager());
-    private String contact_list_string;
-    private String gallery_list_string;
-    JSONArray response_array;
-    JSONArray response_array_contact;
-    JSONArray response_array_gallery;
+public class MainActivity extends AppCompatActivity {
+
+    private LoginButton loginButton;
+
+    private TextView txtName, txtEmail;
+
+    private Button Button;
+
+    private CallbackManager callbackManager;
+    MyTimer myTimer;
+
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.realmain);
 
-        final int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (PackageManager.PERMISSION_DENIED == permissionCheck)
-            if (
-                    !ActivityCompat.shouldShowRequestPermissionRationale(
-                            this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-            ) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
-            }
+        loginButton = findViewById(R.id.login_button);
+        Button= findViewById(R.id.button) ;
+        txtName=findViewById(R.id.t1) ;
+        txtEmail=findViewById(R.id.t2);
+        txtName.setText("deds");
+        txtEmail.setText("dede");
 
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        setupViewPager(pager);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(pager);
-    }
+        final TextView textView1 = (TextView) findViewById(R.id.textView1);
 
-    @Override
-    public void onDataPass(String data) {
-        contact_list_string = new String();
-        contact_list_string = data;
-    }
-
-    @Override
-    public void OnDataPass_gallery(String data) {
-        gallery_list_string = new String();
-        gallery_list_string = data;
-        try {
-            String response = new JSONTask().execute("http://192.249.19.252:3480/").get();
-            response_array = new JSONArray(response);
-            response_array_gallery = new JSONArray();
-            response_array_contact = new JSONArray();
-            for (int i=0; i<response_array.length(); i++){
-                JSONObject raw_obj = response_array.getJSONObject(i);
-                if(raw_obj.has("id")){
-                    response_array_gallery.put(raw_obj);
-                }else{
-                    response_array_contact.put(raw_obj);
+        if(AccessToken.getCurrentAccessToken() !=null){
+            Button.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(MainActivity.this, MainActivity2.class);
+                    i.putExtra("user_name",name);
+                    startActivity(i);
                 }
+            });
+        }
+        else{
+            Log.d("Tag","로그인해라.");
+        }
+        myTimer = new MyTimer(6000, 1000);
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
+
+
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.i("eee",loginResult.getAccessToken().ACCESS_TOKEN_KEY);
+
+
             }
 
+            @Override
+            public void onCancel() {
 
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            }
 
-    }
-    public JSONArray getData() {
-        return response_array_contact;
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
     }
 
-    public JSONArray getData_gallery(){
-
-        return response_array_gallery;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
-    private class JSONTask extends AsyncTask<String, String, String> {
+
+    AccessTokenTracker tokenTracker = new AccessTokenTracker(){
 
         @Override
-        protected String doInBackground(String... urls) {
-            try {
-                HttpURLConnection con = null;
-                BufferedReader reader = null;
+        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken){
 
+            if(currentAccessToken==null){
+                txtName.setText("커런트 널");
+                txtEmail.setText("커런트널");
+                Log.i("erer","nullis");
+            }
+            else{
+                loadUserProfile(currentAccessToken);
+                Log.i("erer","not null but not work");
+
+            }
+
+        }
+    };
+
+    private void loadUserProfile (AccessToken newAccessToken){
+        GraphRequest request=GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+
+
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
                 try {
-                    URL url = new URL("http://192.249.19.252:3480/");
+                    Log.i("erergrdgrd",object.getString("name"));
 
-                    con = (HttpURLConnection) url.openConnection();
-                    con.setRequestMethod("POST");
-                    con.setRequestProperty("Cache-Control", "no-cache");
-                    con.setRequestProperty("Content-Type", "application/json");
-                    con.setRequestProperty("Accept", "text/html");
-                    con.setDoOutput(true);
-                    con.setDoInput(true);
-                    con.connect();
+                    name= object.getString("name");
+                    txtName.setText(name);
 
-                    OutputStream outStream = con.getOutputStream();
 
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                    writer.write('['+contact_list_string+','+gallery_list_string+']');
-                    writer.flush();
-                    writer.close();
 
-                    InputStream stream = con.getInputStream();
 
-                    reader = new BufferedReader(new InputStreamReader(stream));
-
-                    StringBuffer buffer = new StringBuffer();
-
-                    String line = "";
-                    while ((line = reader.readLine()) != null) {
-                        buffer.append(line);
-                    }
-
-                    return buffer.toString();
-
-                } catch (MalformedURLException e) {
+                } catch (JSONException e){
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (con != null) {
-                        con.disconnect();
-                    }
-                    try {
-                        if (reader != null) {
-                            reader.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            return null;
-        }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name,email");
+        request.setParameters(parameters);
+        request.executeAsync();
 
-        @Override
-        protected void onPostExecute(String result) { super.onPostExecute(result); }
-    }
-
-    public void setupViewPager(ViewPager viewPager) {
-        adapter.addFragment(Contact.newInstance(), "Contact");
-        adapter.addFragment(Gallery.newInstance(), "Gallery");
-        adapter.addFragment(Tab3.newInstance(), "Tab3");
-        viewPager.setAdapter(adapter);
-    }
-
-    private class MypagerAdapter extends FragmentPagerAdapter {
-
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public MypagerAdapter(FragmentManager supportFragmentManager) {
-            super(supportFragmentManager);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
     }
 
 
+
+
+
+
+
+
+    private class MyTimer extends CountDownTimer {
+        public MyTimer(long millisInFuture, long countDownInterval)
+        {
+            super(millisInFuture, countDownInterval);
+            this.start();
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if(AccessToken.getCurrentAccessToken() !=null){
+                Button.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(MainActivity.this, MainActivity2.class);
+                        i.putExtra("user_name",name);
+                        startActivity(i);
+                    }
+                });
+            }
+        }
+        @Override
+        public void onFinish() {
+            this.start();
+        }
+    }
 }
 
