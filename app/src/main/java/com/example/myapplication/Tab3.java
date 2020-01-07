@@ -6,6 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,13 +48,16 @@ public class Tab3 extends Fragment {
     int REQUEST = 0;
     JSONArray jsonArray;
     View view;
-    Button button;
+   // Button button;
+   public  String username;
+    String user_name;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -69,15 +75,19 @@ public class Tab3 extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
+        MainActivity2 mainActivity2 = (MainActivity2) getActivity();
+        username= mainActivity2.getName();
+
         Drawable drawable = getResources().getDrawable(R.drawable.basic);
-        button = (Button)view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), PostActivity.class);
-                startActivity(intent);
-            }
-        });
+//       // button = (Button)view.findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(view.getContext(), PostActivity.class);
+//                intent.putExtra("name", username);
+//                startActivity(intent);
+//            }
+//        });
 
         items = new ArrayList<>();
         try{
@@ -114,6 +124,28 @@ public class Tab3 extends Fragment {
 
     }
 
+    // menu xml 파일을 가져오기위한 메소드
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.mymenu, menu);
+    }
+
+    // 이제는 메뉴가 만들어진것들이 동작하게 만들 것이다.
+    // override
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int curId = item.getItemId();
+        switch (curId) {
+            case R.id.write:
+                Intent intent = new Intent(view.getContext(), PostActivity.class);
+                intent.putExtra("user_name",username);
+                Log.i("222222222222Username",username);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onResume() {
@@ -135,6 +167,7 @@ public class Tab3 extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Name = jsonObject.optString("name");
                 Post_msg = jsonObject.getString("post");
+                MainActivity2 mainActivity2 = (MainActivity2) getActivity();
 
                 CardItem = new CardItem(Name, Post_msg, drawable);
 

@@ -25,7 +25,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="사용자0106"
-            android:textSize="20dp"
+            android:textSize="13dp"
             android:textStyle="bold" />
     </LinearLayout>
 

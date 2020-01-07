@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">퇴근좋아</string>
     <string name="facebook_app_id">554276218456737</string> <string name="fb_login_protocol_scheme">fb554276218456737</string>
 
 </resources>

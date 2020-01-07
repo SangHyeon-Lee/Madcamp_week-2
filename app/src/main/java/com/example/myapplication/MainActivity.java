@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -26,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txtName, txtEmail;
 
+    private CircleImageView circleImageView;
+
     private Button Button;
 
     private CallbackManager callbackManager;
     MyTimer myTimer;
 
     private String name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         Button= findViewById(R.id.button) ;
         txtName=findViewById(R.id.t1) ;
-        txtEmail=findViewById(R.id.t2);
-        txtName.setText("deds");
-        txtEmail.setText("dede");
+        txtName.setText("로그인되지 않았습니다.");
+        circleImageView=findViewById(R.id.t3);
+
 
 
         final TextView textView1 = (TextView) findViewById(R.id.textView1);
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
+        //LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
 
 
 
@@ -108,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken){
 
             if(currentAccessToken==null){
-                txtName.setText("커런트 널");
-                txtEmail.setText("커런트널");
+                txtName.setText("로그인되지 않았습니다.");
+                circleImageView.setImageResource(R.drawable.basic);
+                Button.setOnClickListener(null);
+
                 Log.i("erer","nullis");
             }
             else{
@@ -131,7 +140,19 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("erergrdgrd",object.getString("name"));
 
                     name= object.getString("name");
-                    txtName.setText(name);
+                    txtName.setText(name+"님 환영합니다");
+                    String id= object.getString("id");
+                    Log.i("erergrdgrd",object.getString("id"));
+
+                    String image_url = "https://graph.facebook.com/"+ id + "/picture?type=normal";
+
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions.dontAnimate();
+
+                    Glide.with(MainActivity.this).load(image_url).into(circleImageView);
+
+
+
 
 
 

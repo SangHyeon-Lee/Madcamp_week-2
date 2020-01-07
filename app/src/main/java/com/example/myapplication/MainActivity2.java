@@ -96,6 +96,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
+    public String getName() {return user_name;}
+
     public JSONArray getData() {
         return response_array_contact;
     }

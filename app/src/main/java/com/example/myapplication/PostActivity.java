@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,9 +45,15 @@ public class PostActivity extends AppCompatActivity {
         name = (TextView)findViewById(R.id.name);
         imgView = (ImageView)findViewById(R.id.imageView);
         button = (Button)findViewById(R.id.button);
-        user_name = name.getText().toString();
+
+//        user_name = getIntent().getStringExtra("name");
         //post = textView.getText().toString();
         imgView.setImageResource(R.drawable.basic);
+
+        Intent i = getIntent();
+        user_name = i.getStringExtra("user_name");
+        name.setText(user_name);
+        Log.i("1111111111name",user_name);
     }
 
     public void onclick(View v){
@@ -92,7 +99,6 @@ public class PostActivity extends AppCompatActivity {
                 jsonObject.accumulate("time", formatDate);
                 jsonObject.accumulate("post", post);
 
-                Log.i("info_PostActivity", user_name);
 
 
                 try{
