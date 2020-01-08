@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/t0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_gravity="center_horizontal"
+        android:height="100dp"/>
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Hello World!"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/t2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello Worsdeld!"-->
+<!--        android:layout_gravity="center_horizontal"/>-->
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:src="@drawable/basic"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/t3"
+        android:height="300dp"
+        />
+
+    <com.facebook.login.widget.LoginButton
+        android:layout_marginTop="10dp"
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:height="100dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="페이스북 인증을 완료하고 Go 버튼을 누르세요"
+        android:layout_gravity="center_horizontal"
+        android:height="50dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Go" />
+
+
+</LinearLayout>

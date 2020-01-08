@@ -1,0 +1,196 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.myapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+7-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:7:5-9:41
+8        android:minSdkVersion="15"
+8-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:7:5-9:41
+9        android:targetSdkVersion="29" />
+9-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:9:9-38
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:11:5-80
+11-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:11:22-77
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:12:5-81
+12-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:12:22-78
+13    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+13-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:13:5-81
+13-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:13:22-78
+14    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+14-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:14:5-80
+14-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:14:22-77
+15    <uses-permission android:name="android.permission.STORAGE" />
+15-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:15:5-66
+15-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:15:22-63
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:16:5-67
+16-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:16:22-64
+17    <uses-permission android:name="android.permission.READ_CONTACTS" />
+17-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:17:5-72
+17-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:17:22-69
+18    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+18-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:18:5-73
+18-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:18:22-70
+19
+20    <application
+20-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:20:5-101:19
+21        android:allowBackup="true"
+21-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:21:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:22:9-77
+23        android:debuggable="true"
+23-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:23:9-34
+24        android:icon="@mipmap/ic_launcher"
+24-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:24:9-43
+25        android:label="@string/app_name"
+25-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:25:9-41
+26        android:roundIcon="@mipmap/ic_launcher_round"
+26-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:26:9-54
+27        android:supportsRtl="true"
+27-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:27:9-35
+28        android:testOnly="true"
+28-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:28:9-32
+29        android:theme="@style/AppTheme" >
+29-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:29:9-40
+30        <activity android:name="com.example.myapplication.ContactDetailView" />
+30-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:30:9-80
+30-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:30:19-77
+31        <activity android:name="com.example.myapplication.Picture_detail" />
+31-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:31:9-77
+31-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:31:19-74
+32        <activity android:name="com.example.myapplication.Image_GridView_Adapter" />
+32-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:32:9-85
+32-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:32:19-82
+33        <activity android:name="com.example.myapplication.RecyclerViewAdapter" />
+33-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:33:9-82
+33-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:33:19-79
+34        <activity android:name="com.example.myapplication.Tab3" />
+34-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:34:9-67
+34-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:34:19-64
+35        <activity android:name="com.example.myapplication.Gallery" />
+35-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:35:9-70
+35-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:35:19-67
+36        <activity android:name="com.example.myapplication.Contact" />
+36-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:36:9-70
+36-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:36:19-67
+37        <activity android:name="com.example.myapplication.PostActivity" />
+37-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:37:9-75
+37-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:37:19-72
+38        <activity android:name="com.example.myapplication.MainActivity" >
+38-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:38:9-44:20
+38-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:38:19-72
+39            <intent-filter>
+39-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:39:13-43:29
+40                <action android:name="android.intent.action.MAIN" />
+40-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:40:17-69
+40-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:40:25-66
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+42-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:42:17-77
+42-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:42:27-74
+43            </intent-filter>
+44        </activity>
+45        <activity android:name="com.example.myapplication.MainActivity2" />
+45-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:45:9-76
+45-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:45:19-73
+46        <activity android:name="com.example.myapplication.CommentActivity" />
+46-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:46:9-62
+46-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:46:19-50
+47
+48        <meta-data
+48-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:50:9-52:55
+49            android:name="com.facebook.sdk.ApplicationId"
+49-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:51:13-58
+50            android:value="@string/facebook_app_id" />
+50-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:52:13-52
+51
+52        <activity
+52-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:54:9-58:66
+53            android:name="com.facebook.FacebookActivity"
+53-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:55:13-57
+54            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+54-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:56:13-96
+55            android:label="@string/app_name"
+55-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:57:13-45
+56            android:theme="@style/com_facebook_activity_theme" />
+56-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:58:13-63
+57        <activity
+57-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:59:9-70:20
+58            android:name="com.facebook.CustomTabActivity"
+58-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:60:13-58
+59            android:exported="true" >
+59-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:61:13-36
+60            <intent-filter>
+60-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:62:13-69:29
+61                <action android:name="android.intent.action.VIEW" />
+61-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:63:17-69
+61-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:63:25-66
+62
+63                <category android:name="android.intent.category.DEFAULT" />
+63-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:65:17-76
+63-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:65:27-73
+64                <category android:name="android.intent.category.BROWSABLE" />
+64-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:66:17-78
+64-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:66:27-75
+65
+66                <data android:scheme="@string/fb_login_protocol_scheme" />
+66-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:68:17-75
+66-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:68:23-72
+67            </intent-filter>
+68        </activity>
+69        <activity android:name="com.facebook.CustomTabMainActivity" />
+69-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:71:9-71
+69-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:71:19-68
+70        <!--
+71         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+72         with the application context. This config is merged in with the host app's manifest,
+73         but there can only be one provider with the same authority activated at any given
+74         point; so if the end user has two or more different apps that use Facebook SDK, only the
+75         first one will be able to use the provider. To work around this problem, we use the
+76         following placeholder in the authority to identify each host application as if it was
+77         a completely different provider.
+78        -->
+79        <provider
+79-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:81:9-84:40
+80            android:name="com.facebook.internal.FacebookInitProvider"
+80-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:82:13-70
+81            android:authorities="com.example.myapplication.FacebookInitProvider"
+81-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:83:13-81
+82            android:exported="false" />
+82-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:84:13-37
+83
+84        <receiver
+84-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:86:9-92:20
+85            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+85-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:87:13-86
+86            android:exported="false" >
+86-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:88:13-37
+87            <intent-filter>
+87-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:89:13-91:29
+88                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+88-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:90:17-95
+88-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:90:25-92
+89            </intent-filter>
+90        </receiver>
+91        <receiver
+91-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:93:9-100:20
+92            android:name="com.facebook.CampaignTrackingReceiver"
+92-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:94:13-65
+93            android:exported="true"
+93-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:95:13-36
+94            android:permission="android.permission.INSTALL_PACKAGES" >
+94-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:96:13-69
+95            <intent-filter>
+95-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:97:13-99:29
+96                <action android:name="com.android.vending.INSTALL_REFERRER" />
+96-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:98:17-79
+96-->C:\Users\q\Desktop\comment_11\Madcamp_week2-commit_1\app\src\main\AndroidManifest.xml:98:25-76
+97            </intent-filter>
+98        </receiver>
+99    </application>
+100
+101</manifest>
