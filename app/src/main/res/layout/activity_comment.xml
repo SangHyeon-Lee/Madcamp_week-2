@@ -43,7 +43,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText11"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="댓글을 입력하세요" />
