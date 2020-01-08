@@ -50,7 +50,7 @@ public class Tab3 extends Fragment {
     View view;
    // Button button;
    public  String username;
-    String user_name;
+    //String user_name;
 
 
 
@@ -118,6 +118,7 @@ public class Tab3 extends Fragment {
         }
 
         recyclerAdapter = new RecyclerAdapter(getContext(),items,R.layout.card_item);
+        recyclerAdapter.setUserNname(username);
         recyclerView.setAdapter(recyclerAdapter);
 
         return view;

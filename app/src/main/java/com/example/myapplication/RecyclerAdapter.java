@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     Context context;
     ArrayList<CardItem> items;
     int item_layout;
+    String user_name="nothing";
 
     public RecyclerAdapter(Context context, ArrayList<CardItem> items, int item_layout) {
         this.context = context;
@@ -35,7 +38,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
 
     // 재활용 되는 View가 호출, Adapter가 해당 position에 해당하는 데이터를 결합
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         final CardItem item = items.get(position);
         Drawable drawable = item.getImage();
@@ -44,12 +47,15 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
         holder.name.setText(item.getName());
         holder.post.setText(item.getPost());
 
-        /*holder.cardview.setOnClickListener(new View.OnClickListener() {
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(context.getApplicationContext(),CommentActivity.class);
+                i.putExtra("post",holder.post.getText().toString());
+                i.putExtra("user_name",user_name);
+                  context.startActivity(i);
             }
-        }); */
+        });
     }
 
     @Override
@@ -71,5 +77,8 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
             post = (TextView) itemView.findViewById(R.id.post);
             cardview = (CardView) itemView.findViewById(R.id.cardview);
         }
+    }
+    public void setUserNname(String name){
+        this.user_name = name;
     }
 }
